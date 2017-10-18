@@ -13,6 +13,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JSplitPane;
 import java.awt.Color;
+import java.awt.GridLayout;
 
 public class MainFrame extends JFrame {
 
@@ -53,6 +54,14 @@ public class MainFrame extends JFrame {
 		JSplitPane splitPane = new JSplitPane();
 		splitPane.setForeground(Color.WHITE);
 		splitPane.setBackground(Color.WHITE);
-		contentPane.add(splitPane, BorderLayout.CENTER);
+		contentPane.add(splitPane);
+		
+		JPanel panel = new JPanel();
+		splitPane.setLeftComponent(panel);
+		panel.setLayout(new GridLayout(1, 0, 0, 0));
+		
+		JPanel panel_1 = new JPanel();
+		splitPane.setRightComponent(panel_1);
+		panel_1.setLayout(new BorderLayout(0, 0));
 	}
 }
