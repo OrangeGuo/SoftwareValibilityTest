@@ -52,13 +52,23 @@ public class MainFrame extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
 		JSplitPane splitPane = new JSplitPane();
+		splitPane.setResizeWeight(0.3);
 		splitPane.setForeground(Color.WHITE);
 		splitPane.setBackground(Color.WHITE);
 		contentPane.add(splitPane);
 		
 		JPanel panel = new JPanel();
 		splitPane.setLeftComponent(panel);
-		panel.setLayout(new GridLayout(1, 0, 0, 0));
+		panel.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		JButton btnNewButton_1 = new JButton("New button");
+		panel.add(btnNewButton_1);
+		
+		JButton btnNewButton = new JButton("New button");
+		panel.add(btnNewButton);
+		
+		JButton btnNewButton_2 = new JButton("New button");
+		panel.add(btnNewButton_2);
 		
 		JPanel panel_1 = new JPanel();
 		splitPane.setRightComponent(panel_1);
