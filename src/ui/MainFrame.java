@@ -7,11 +7,19 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+
 import javax.swing.JSplitPane;
+
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.ChartPanel;
+
+import components.TestChart;
+
 import java.awt.Color;
 import java.awt.GridLayout;
 
@@ -61,17 +69,14 @@ public class MainFrame extends JFrame {
 		splitPane.setLeftComponent(panel);
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JButton btnNewButton_1 = new JButton("New button");
-		panel.add(btnNewButton_1);
-		
-		JButton btnNewButton = new JButton("New button");
-		panel.add(btnNewButton);
-		
-		JButton btnNewButton_2 = new JButton("New button");
-		panel.add(btnNewButton_2);
-		
 		JPanel panel_1 = new JPanel();
 		splitPane.setRightComponent(panel_1);
 		panel_1.setLayout(new BorderLayout(0, 0));
+		
+		ChartPanel chartFrame = TestChart.getChartFrame();
+//	    chartFrame.pack();
+//	    chartFrame.setVisible(true);
+	    
+	    panel_1.add(chartFrame,BorderLayout.CENTER);
 	}
 }
