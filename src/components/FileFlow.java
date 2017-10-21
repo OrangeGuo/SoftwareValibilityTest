@@ -4,20 +4,20 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class FileFlow {
-	public static String loadFile(String filename){
+	public static ArrayList<Float> loadFile(String filename){
 		FileReader filereader=null;
 		BufferedReader bufferedreader=null;
-		String content = "";
+		ArrayList<Float> arrayList = new ArrayList<Float>();
 	     try {
 			filereader=new FileReader(filename);
 			bufferedreader=new BufferedReader(filereader);
 			String s="";
 				while((s=bufferedreader.readLine())!=null)
 				{   
-					s += "\t\r";
-			        content += s;
+					arrayList.add(Float.parseFloat(s));
 				}	
 		}catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -31,6 +31,6 @@ public class FileFlow {
 				e1.printStackTrace();
 			}
 	   }
-	     return content;
+	     return arrayList;
 	}
 }

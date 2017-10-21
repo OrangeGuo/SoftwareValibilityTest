@@ -36,6 +36,9 @@ public class MainFrame extends JFrame {
 				try {
 					MainFrame frame = new MainFrame();
 					frame.setVisible(true);
+//					frame.setResizable(false);
+					frame.setSize(800, 600);
+					frame.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -60,7 +63,7 @@ public class MainFrame extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
 		JSplitPane splitPane = new JSplitPane();
-		splitPane.setResizeWeight(0.3);
+		splitPane.setResizeWeight(0.2);
 		splitPane.setForeground(Color.WHITE);
 		splitPane.setBackground(Color.WHITE);
 		contentPane.add(splitPane);
