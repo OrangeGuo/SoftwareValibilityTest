@@ -14,9 +14,9 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 
-public class TestChart {
+public class ChartPanelFacotry {
 
-	public static ChartPanel  getChartFrame() {
+	public static ChartPanel  getChartPanel() {
 		// TODO Auto-generated method stub
 	    StandardChartTheme mChartTheme = new StandardChartTheme("CN");
 	    mChartTheme.setLargeFont(new Font("黑体", Font.BOLD, 20));
@@ -26,7 +26,7 @@ public class TestChart {
 	    CategoryDataset mDataset = GetDataset();
 	    JFreeChart mChart = ChartFactory.createLineChart(
 	        "折线图",//图名字
-	        "迭代次数",//横坐标
+	        "迭代次数(千次)",//横坐标
 	        "误差",//纵坐标
 	        mDataset,//数据集
 	        PlotOrientation.VERTICAL,
@@ -46,21 +46,9 @@ public class TestChart {
 	  public static CategoryDataset GetDataset()
 	  {
 	    DefaultCategoryDataset mDataset = new DefaultCategoryDataset();
-//	    mDataset.addValue(1, "First", "2013");
-//	    mDataset.addValue(3, "First", "2014");
-//	    mDataset.addValue(2, "First", "2015");
-//	    mDataset.addValue(6, "First", "2016");
-//	    mDataset.addValue(5, "First", "2017");
-//	    mDataset.addValue(12, "First", "2018");
-//	    mDataset.addValue(14, "Second", "2013");
-//	    mDataset.addValue(13, "Second", "2014");
-//	    mDataset.addValue(12, "Second", "2015");
-//	    mDataset.addValue(9, "Second", "2016");
-//	    mDataset.addValue(5, "Second", "2017");
-//	    mDataset.addValue(7, "Second", "2018");
-	    ArrayList<Float> arrayList = FileFlow.loadFile("/home/orange/Workspaces/MyEclipse 2015/SoftwareReliabilityTest/b.txt");
+	    ArrayList<Float> arrayList = FileFlow.loadFile("data/c.txt");
 	    for(int i =0;i<arrayList.size();i++)
-	    	mDataset.addValue(arrayList.get(i), "BPN", String.valueOf(1000*(i+1)));
+	    	mDataset.addValue(arrayList.get(i), "BPN", String.valueOf(i+1));
 	    return mDataset;
 	  }
 }

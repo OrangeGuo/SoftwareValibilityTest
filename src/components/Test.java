@@ -11,7 +11,8 @@ public class Test {
 //        	System.out.println(arrayList.get(i));
 		try {
 			Process process = Runtime.getRuntime().exec("python2 /home/orange/PycharmProjects/machinelearning/BPnetwork.py");
-		    try {
+//		    Process process = Runtime.getRuntime().exec("python2  BPnetwork.py");
+			try {
 				process.waitFor();
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
