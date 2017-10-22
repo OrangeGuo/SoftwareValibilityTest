@@ -25,6 +25,9 @@ import java.awt.GridLayout;
 
 public class MainFrame extends JFrame {
 
+	/**
+	 * 
+	 */
 	private JPanel contentPane;
 
 	/**
