@@ -26,7 +26,7 @@ public class ChartPanelFacotry {
 	    CategoryDataset mDataset = GetDataset();
 	    JFreeChart mChart = ChartFactory.createLineChart(
 	        "折线图",//图名字
-	        "迭代次数(千次)",//横坐标
+	        "迭代次数(百次)",//横坐标
 	        "误差",//纵坐标
 	        mDataset,//数据集
 	        PlotOrientation.VERTICAL,
@@ -47,8 +47,12 @@ public class ChartPanelFacotry {
 	  {
 	    DefaultCategoryDataset mDataset = new DefaultCategoryDataset();
 	    ArrayList<Float> arrayList = FileFlow.loadFile("data/c.txt");
-	    for(int i =0;i<arrayList.size();i++)
-	    	mDataset.addValue(arrayList.get(i), "BPN", String.valueOf(i+1));
+	    for(int i =0;i<arrayList.size();i++){
+	    	if(i%10==0)
+	    		mDataset.addValue(arrayList.get(i), "BPN", String.valueOf(i/10));
+	    	else 
+	    		mDataset.addValue(arrayList.get(i), "BPN","");
+	    }
 	    return mDataset;
 	  }
 }

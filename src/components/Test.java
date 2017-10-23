@@ -1,27 +1,19 @@
 package components;
 
-import java.io.IOException;
-import java.util.ArrayList;
+import javax.swing.JFrame;
 
-public class Test {
+public class Test extends JFrame{
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 //        ArrayList<Float> arrayList = FileFlow.loadFile("/home/orange/Workspaces/MyEclipse 2015/SoftwareReliabilityTest/b.txt");
-//        for(int i=0;i<arrayList.size();i++)
-//        	System.out.println(arrayList.get(i));
-		try {
-			Process process = Runtime.getRuntime().exec("python2 /home/orange/PycharmProjects/machinelearning/BPnetwork.py");
-//		    Process process = Runtime.getRuntime().exec("python2  BPnetwork.py");
-			try {
-				process.waitFor();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+           Test test = new Test();
+	}
+	public Test(){
+	     this.setTitle("进度条的使用");  
+	     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
+	     this.setBounds(100, 100, 400, 400); 
+	     this.add(new MyProcessBar());
+	     this.setVisible(true);
 	}
 
 }

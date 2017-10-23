@@ -9,6 +9,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 
@@ -24,6 +25,7 @@ import org.jfree.chart.ChartFrame;
 import org.jfree.chart.ChartPanel;
 
 import components.ChartPanelFacotry;
+import components.MyProcessBar;
 
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -33,6 +35,7 @@ import javax.swing.UIManager;
 
 import java.awt.Font;
 import java.io.IOException;
+import java.awt.CardLayout;
 
 public class MainFrame extends JFrame implements ActionListener {
 
@@ -47,7 +50,7 @@ public class MainFrame extends JFrame implements ActionListener {
     private JMenuItem loaddata;
     private JMenuItem analyse;
     private JSplitPane splitPane_1;
-    private JPanel panel_1;
+    private JTabbedPane panel_1;
     private JPanel panel_2;
     private JPanel panel_3;
     private JButton bpnetButton;
@@ -117,9 +120,11 @@ public class MainFrame extends JFrame implements ActionListener {
 		splitPane_1.setRightComponent(panel_3);
 		panel_3.setLayout(new GridLayout(12, 1, 0, 0));
 		
-		panel_1 = new JPanel();
+		panel_1 = new JTabbedPane();
+		panel_1.setFont(new Font("Bitstream Vera Sans", Font.BOLD, 14));
 		splitPane.setRightComponent(panel_1);
-		panel_1.setLayout(new BorderLayout(0, 0));
+//		panel_1.setLayout(new CardLayout(0, 0));
+//		panel_1.add(ChartPanelFacotry.getChartPanel(),"bp");
 		
 	    panel_3.add(bpnetButton);
 	    
@@ -165,21 +170,21 @@ public class MainFrame extends JFrame implements ActionListener {
 		}
 		else if(e.getSource().equals(bpnetButton)){
 			bpnetButton.setEnabled(false);
-			try {
-				Process process = Runtime.getRuntime().exec("python2 BPnetwork.py");
-			    try {
-					process.waitFor();
-				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			} catch (IOException e2) {
-				// TODO Auto-generated catch block
-				e2.printStackTrace();
-			}
+//			try {
+//				Process process = Runtime.getRuntime().exec("python2 BPnetwork.py");
+//			    try {
+//					process.waitFor();
+//				} catch (InterruptedException e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				}
+//			} catch (IOException e2) {
+//				// TODO Auto-generated catch block
+//				e2.printStackTrace();
+//			}
 			ChartPanel chartPanel = ChartPanelFacotry.getChartPanel();
-			panel_1.add(chartPanel,BorderLayout.CENTER);
-			panel_1.updateUI();
+			panel_1.add(chartPanel,"bpnet");
+			panel_1.revalidate();
 			bpnetButton.setEnabled(true);
 		}
 	}

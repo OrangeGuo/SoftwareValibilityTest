@@ -10,8 +10,6 @@ epsilion = 0.01
 reg_lambda = 0.01
 # X = np.array([[0, 0, 1], [0, 1, 1], [1, 0, 1], [1, 1, 1]])
 # y = np.array([[0, 1, 1, 0]]).T
-np.random.seed(0)
-
 
 
 def net_init():
@@ -50,7 +48,7 @@ def train(net,loops=20000):
         b1 += -epsilion*db1
         b2 += -epsilion*db2
         net = {'sample': sample, 'result': result, 'W1': W1, 'W2': W2, 'b1': b1, 'b2': b2}
-        if i % 1000 == 0:
+        if i % 100 == 0:
             print("loss after iteration %i: %f" % (i, loss_function(net)))
             axis.append(loss_function(net))
     with open('data/c.txt','w') as file:
