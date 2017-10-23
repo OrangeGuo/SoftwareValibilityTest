@@ -51,7 +51,7 @@ def train(net,loops=20000):
         if i % 100 == 0:
             print("loss after iteration %i: %f" % (i, loss_function(net)))
             axis.append(loss_function(net))
-    with open('data/c.txt','w') as file:
+    with open('data/BPnetwork.txt','w') as file:
         s= '\t\r'.join(str(i) for i in axis)
         file.write(s)
         file.close()

@@ -1,6 +1,7 @@
 package components;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -32,5 +33,17 @@ public class FileFlow {
 			}
 	   }
 	     return arrayList;
+	}
+	public static ArrayList<String> getDirectory(){
+		ArrayList<String> directory  = new ArrayList<String>();
+		File file = new File("data");
+		if(!file.exists()||!file.isDirectory())
+			System.out.println("Error:data not found!");
+		else {
+			File files[] = file.listFiles();
+			for(int i = 0;i < files.length; i++)
+				directory.add(files[i].getName());
+		}
+		return directory;
 	}
 }
