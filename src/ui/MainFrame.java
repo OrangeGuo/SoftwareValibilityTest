@@ -1,6 +1,7 @@
 package ui;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 
@@ -18,6 +19,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JSplitPane;
 
@@ -25,7 +28,10 @@ import org.jfree.chart.ChartFrame;
 import org.jfree.chart.ChartPanel;
 
 import components.ChartPanelFacotry;
+import components.FileFlow;
+import components.MyDataPanel;
 import components.MyProcessBar;
+import components.MyTabbedPane;
 
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -35,9 +41,19 @@ import javax.swing.UIManager;
 
 import java.awt.Font;
 import java.io.IOException;
+import java.nio.channels.NetworkChannel;
+import java.util.ArrayList;
 import java.awt.CardLayout;
 
-public class MainFrame extends JFrame implements ActionListener {
+import javax.swing.JScrollPane;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import javax.swing.JList;
+import javax.swing.ListSelectionModel;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.LineBorder;
+
+public class MainFrame extends JFrame implements ActionListener,MouseListener{
 
 	/**
 	 * @author orange
@@ -50,11 +66,13 @@ public class MainFrame extends JFrame implements ActionListener {
     private JMenuItem loaddata;
     private JMenuItem analyse;
     private JSplitPane splitPane_1;
-    private JTabbedPane panel_1;
+    private MyTabbedPane panel_1;
     private JPanel panel_2;
     private JPanel panel_3;
-    private JButton bpnetButton;
-    
+    private JLabel lblNewLabel;
+    private JList list;
+    private ArrayList<String> arrayList,network;
+    private ArrayList<JButton> jButtons;
 
     /**
 	 * Launch the application.
@@ -93,10 +111,19 @@ public class MainFrame extends JFrame implements ActionListener {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		bpnetButton = new JButton("bpnet");
-		bpnetButton.setBackground(new Color(0, 255, 255));
-		bpnetButton.setFont(new Font("Bitstream Vera Sans", Font.PLAIN, 14));
-		bpnetButton.addActionListener(this);
+		network = new ArrayList<String>();
+		network.add("BPnetwork");
+		
+		jButtons = new ArrayList<JButton>();
+		
+		for(int i = 0;i<network.size();i++){
+			JButton jButton = new JButton(network.get(i));
+			jButton.setBackground(new Color(0, 255, 255));
+			jButton.setFont(new Font("Bitstream Vera Sans", Font.PLAIN, 14));
+			jButton.addActionListener(this);
+			jButtons.add(jButton);
+		}
+		
 		
 		JSplitPane splitPane = new JSplitPane();
 		splitPane.setResizeWeight(0.2);
@@ -114,19 +141,35 @@ public class MainFrame extends JFrame implements ActionListener {
 		panel.add(splitPane_1, BorderLayout.CENTER);
 		
 		panel_2 = new JPanel();
+		panel_2.setBackground(Color.LIGHT_GRAY);
 		splitPane_1.setLeftComponent(panel_2);
+		panel_2.setLayout(new BorderLayout(0, 0));
+		
+		lblNewLabel = new JLabel("Data");
+		lblNewLabel.setBackground(Color.GRAY);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Bitstream Vera Sans", Font.BOLD, 16));
+		panel_2.add(lblNewLabel, BorderLayout.NORTH);
+		
+		arrayList = FileFlow.getDirectory();
+		list = new JList((String [])arrayList.toArray(new String[arrayList.size()]));
+		list.setBorder(new EmptyBorder(0, 0, 0, 0));
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		list.setBackground(Color.WHITE);
+		list.setVisibleRowCount(5);
+		list.setFont(new Font("Bitstream Vera Sans", Font.PLAIN, 12));
+		list.addMouseListener(this);
+		panel_2.add(list, BorderLayout.CENTER);
 		
 		panel_3 = new JPanel();
 		splitPane_1.setRightComponent(panel_3);
 		panel_3.setLayout(new GridLayout(12, 1, 0, 0));
 		
-		panel_1 = new JTabbedPane();
-		panel_1.setFont(new Font("Bitstream Vera Sans", Font.BOLD, 14));
+		panel_1 = new MyTabbedPane();
 		splitPane.setRightComponent(panel_1);
-//		panel_1.setLayout(new CardLayout(0, 0));
-//		panel_1.add(ChartPanelFacotry.getChartPanel(),"bp");
 		
-	    panel_3.add(bpnetButton);
+	    for(int i = 0;i<network.size();i++)
+	    	panel_3.add(jButtons.get(i));
 	    
 	    jMenuBar = new JMenuBar();
 	    jMenuBar.setBackground(new Color(192, 192, 192));
@@ -168,8 +211,8 @@ public class MainFrame extends JFrame implements ActionListener {
 		if(e.getActionCommand().equals("exit")){
 			System.exit(0);
 		}
-		else if(e.getSource().equals(bpnetButton)){
-			bpnetButton.setEnabled(false);
+		else{
+
 //			try {
 //				Process process = Runtime.getRuntime().exec("python2 BPnetwork.py");
 //			    try {
@@ -182,10 +225,55 @@ public class MainFrame extends JFrame implements ActionListener {
 //				// TODO Auto-generated catch block
 //				e2.printStackTrace();
 //			}
-			ChartPanel chartPanel = ChartPanelFacotry.getChartPanel();
-			panel_1.add(chartPanel,"bpnet");
-			panel_1.revalidate();
-			bpnetButton.setEnabled(true);
+			for(int i = 0;i<jButtons.size();i++){
+				JButton jButton=jButtons.get(i);
+				if(e.getSource().equals(jButton)&&!panel_1.isHave(network.get(i))){
+					jButton.setEnabled(false);
+					panel_1.addChart(ChartPanelFacotry.getChartPanel(), network.get(i));
+					jButton.setEnabled(true);
+					
+				}
+			}
+//			bpnetButton.setEnabled(false);
+//			ChartPanel chartPanel = ChartPanelFacotry.getChartPanel();
+//			panel_1.addChart(chartPanel,"bpnet");
+//			panel_1.revalidate();
+//			bpnetButton.setEnabled(true);
 		}
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getClickCount()==2){
+			String filepath = arrayList.get(list.getSelectedIndex());
+			if(!panel_1.isHave(filepath)){
+				panel_1.addData(new MyDataPanel("data/"+filepath),filepath);
+			}
+		}
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }
