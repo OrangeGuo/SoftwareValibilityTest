@@ -36,6 +36,7 @@ public class MyTabbedPane extends JTabbedPane implements ActionListener{
     	jPanels.add(jpanel);
     	jButtons.add(close);
     	this.add(jpanel,note);
+    	this.setSelectedIndex(notes.size());
     	notes.add(note);
     }
     public void  addData(MyDataPanel myDataPanel,String note){
@@ -47,6 +48,7 @@ public class MyTabbedPane extends JTabbedPane implements ActionListener{
     	jPanels.add(jpanel);
     	jButtons.add(close);
     	this.add(jpanel,note);
+    	this.setSelectedIndex(notes.size());
     	notes.add(note);
     }
     public boolean isHave(String note){
@@ -58,6 +60,16 @@ public class MyTabbedPane extends JTabbedPane implements ActionListener{
     			break;
     		}
     	return flag;
+    }
+    public void remove(String note){
+     	for(int i = 0;i < notes.size();i++)
+    		if(note.equals(notes.get(i))){
+				jButtons.remove(i);
+				this.remove(jPanels.get(i));
+				jPanels.remove(i);
+				notes.remove(i);
+				break;
+    		}
     }
 	@Override
 	public void actionPerformed(ActionEvent e) {

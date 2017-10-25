@@ -71,7 +71,7 @@ public class MainFrame extends JFrame implements ActionListener,MouseListener{
     private JPanel panel_3;
     private JLabel lblNewLabel;
     private JList list;
-    private ArrayList<String> arrayList,network;
+    private ArrayList<String> fileList,network;
     private ArrayList<JButton> jButtons;
 
     /**
@@ -151,15 +151,7 @@ public class MainFrame extends JFrame implements ActionListener,MouseListener{
 		lblNewLabel.setFont(new Font("Bitstream Vera Sans", Font.BOLD, 16));
 		panel_2.add(lblNewLabel, BorderLayout.NORTH);
 		
-		arrayList = FileFlow.getDirectory();
-		list = new JList((String [])arrayList.toArray(new String[arrayList.size()]));
-		list.setBorder(new EmptyBorder(0, 0, 0, 0));
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		list.setBackground(Color.WHITE);
-		list.setVisibleRowCount(5);
-		list.setFont(new Font("Bitstream Vera Sans", Font.PLAIN, 12));
-		list.addMouseListener(this);
-		panel_2.add(list, BorderLayout.CENTER);
+		this.loaddata();
 		
 		panel_3 = new JPanel();
 		splitPane_1.setRightComponent(panel_3);
@@ -204,12 +196,34 @@ public class MainFrame extends JFrame implements ActionListener,MouseListener{
 	    
 	    contentPane.add(jMenuBar,BorderLayout.NORTH);
 	}
-
+    public void loaddata(){
+    	for(int i = 0;fileList!=null&&i<fileList.size();i++)
+    		panel_1.remove(fileList.get(i));
+    	panel_2.removeAll();
+		fileList = FileFlow.getDirectory();
+		list = new JList((String [])fileList.toArray(new String[fileList.size()]));
+		list.setBorder(new EmptyBorder(0, 0, 0, 0));
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		list.setBackground(Color.WHITE);
+		list.setVisibleRowCount(5);
+		list.setFont(new Font("Bitstream Vera Sans", Font.PLAIN, 12));
+		list.addMouseListener(this);
+		panel_2.add(list, BorderLayout.CENTER);
+		panel_2.revalidate();
+    }
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getActionCommand().equals("exit")){
 			System.exit(0);
+		}
+		
+		else if(e.getActionCommand().equals("load")){
+			this.loaddata();
+		}
+		else if(e.getActionCommand().equals("analyse")){
+			MyProcessBar myProcessBar = new MyProcessBar();
+			myProcessBar.process();
 		}
 		else{
 
@@ -246,7 +260,7 @@ public class MainFrame extends JFrame implements ActionListener,MouseListener{
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getClickCount()==2){
-			String filepath = arrayList.get(list.getSelectedIndex());
+			String filepath = fileList.get(list.getSelectedIndex());
 			if(!panel_1.isHave(filepath)){
 				panel_1.addData(new MyDataPanel("data/"+filepath),filepath);
 			}

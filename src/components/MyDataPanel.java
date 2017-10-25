@@ -13,6 +13,7 @@ public class MyDataPanel extends JScrollPane{
 //		setLayout(new BorderLayout());
 		setFont(new Font("Bitstream Vera Sans", Font.BOLD, 14));
 		JTextArea jTextArea = new JTextArea(FileFlow.getContent(path));
+		jTextArea.setEditable(false);
 		setViewportView(jTextArea);
 	}
 
