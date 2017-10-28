@@ -113,9 +113,9 @@ public class MainFrame extends JFrame implements ActionListener,MouseListener{
 		
 		network = new ArrayList<String>();
 		network.add("BPnetwork");
-		network.add("SVM");
+		network.add("ELM");
 		network.add("RNN");
-		network.add("LSTM");
+		network.add("Fail");
 		
 		jButtons = new ArrayList<JButton>();
 		
@@ -246,7 +246,7 @@ public class MainFrame extends JFrame implements ActionListener,MouseListener{
 				JButton jButton=jButtons.get(i);
 				if(e.getSource().equals(jButton)&&!panel_1.isHave(network.get(i))){
 					jButton.setEnabled(false);
-					panel_1.addChart(ChartPanelFacotry.getChartPanel(), network.get(i));
+					panel_1.addChart(ChartPanelFacotry.getChartPanel(network.get(i)), network.get(i));
 					jButton.setEnabled(true);
 					
 				}
