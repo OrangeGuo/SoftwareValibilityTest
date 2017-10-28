@@ -46,12 +46,10 @@ public class ChartPanelFacotry {
 	  public static CategoryDataset GetDataset()
 	  {
 	    DefaultCategoryDataset mDataset = new DefaultCategoryDataset();
-	    ArrayList<Float> arrayList = FileFlow.loadFile("data/BPnetwork.txt");
+	    ArrayList<Float> arrayList = FileFlow.loadFile("data/fail.txt");
 	    for(int i =0;i<arrayList.size();i++){
-	    	if(i%10==0)
-	    		mDataset.addValue(arrayList.get(i), "BPN", String.valueOf(i/10));
-	    	else 
-	    		mDataset.addValue(arrayList.get(i), "BPN","");
+	    		mDataset.addValue(arrayList.get(i), "BPN", String.valueOf(i+1));
+	
 	    }
 	    return mDataset;
 	  }

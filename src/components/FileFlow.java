@@ -18,7 +18,8 @@ public class FileFlow {
 			String s="";
 				while((s=bufferedreader.readLine())!=null)
 				{   
-					arrayList.add(Float.parseFloat(s));
+					if(!s.equals(""))
+						arrayList.add(Float.parseFloat(s));
 				}	
 		}catch (IOException e) {
 			// TODO Auto-generated catch block
