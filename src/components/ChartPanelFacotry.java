@@ -50,9 +50,9 @@ public class ChartPanelFacotry {
 	    int index=0;
 	    float temp =0;
 	    for(int i =0;i<arrayList.size();i++){
-	    	    temp+=arrayList.get(i);
+	    	    temp = arrayList.get(i);
 	    	    index =index+i+1;
-	    		mDataset.addValue(temp,net, String.valueOf(index));
+	    		mDataset.addValue(temp,net,  String.valueOf(i+1));
 	    }
 	    return mDataset;
 	  }
