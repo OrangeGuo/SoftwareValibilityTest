@@ -10,7 +10,7 @@ y = []
 loop = 0
 temp = 0.0
 index = 0.0
-for line in open('/home/orange/Workspaces/MyEclipse 2015/SoftwareReliabilityTest/data/CSR3.DAT'):
+for line in open('data/CSR3.DAT'):
     s = line.strip().split()
     if s :
         loop+=1
