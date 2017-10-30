@@ -19,6 +19,19 @@ public class MyProcessBar extends JDialog {
 		progressBar.setFont(new Font("Bitstream Vera Sans", Font.BOLD, 20));
 		progressBar.setString("ready for ...");
 		add(progressBar);
+		new Thread() {
+			public void run() {
+				for (int i = 0; i <= 10; i++) {
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					progressBar.setValue((i+1)*10);
+				}
+				process();
+			}
+		}.start();
 		this.setSize(300, 100);
 		this.setLocationRelativeTo(null);
 		this.setModal(true);
@@ -27,24 +40,20 @@ public class MyProcessBar extends JDialog {
 	}
 
 	public void process() {
+		try {
+		Process process = Runtime.getRuntime().exec("python EML.py");
+	    try {
+			process.waitFor();
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	} catch (Exception e2) {
+		// TODO Auto-generated catch block
+		e2.printStackTrace();
+	}
 		progressBar.setString("finished ,wait ...");
 		jPanel.revalidate();
-	}
-
-	public void run() {
-		new Thread() {
-			public void run() {
-				for (int i = 0; i <= 100; i++) {
-					try {
-						Thread.sleep(100);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					progressBar.setValue(i);
-				}
-				progressBar.setString("right now");
-			}
-		}.start();
-	}
-	
+		this.dispose();
+	}	
 }

@@ -226,22 +226,10 @@ public class MainFrame extends JFrame implements ActionListener,MouseListener{
 		}
 		else if(e.getActionCommand().equals("analyse")){
 			MyProcessBar myProcessBar = new MyProcessBar();
-			myProcessBar.process();
 		}
 		else{
 
-//			try {
-//				Process process = Runtime.getRuntime().exec("python2 BPnetwork.py");
-//			    try {
-//					process.waitFor();
-//				} catch (InterruptedException e1) {
-//					// TODO Auto-generated catch block
-//					e1.printStackTrace();
-//				}
-//			} catch (IOException e2) {
-//				// TODO Auto-generated catch block
-//				e2.printStackTrace();
-//			}
+
 			for(int i = 0;i<jButtons.size();i++){
 				JButton jButton=jButtons.get(i);
 				if(e.getSource().equals(jButton)&&!panel_1.isHave(network.get(i))){
