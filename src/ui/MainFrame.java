@@ -239,11 +239,7 @@ public class MainFrame extends JFrame implements ActionListener,MouseListener{
 					
 				}
 			}
-//			bpnetButton.setEnabled(false);
-//			ChartPanel chartPanel = ChartPanelFacotry.getChartPanel();
-//			panel_1.addChart(chartPanel,"bpnet");
-//			panel_1.revalidate();
-//			bpnetButton.setEnabled(true);
+
 		}
 	}
 

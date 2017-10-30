@@ -53,6 +53,18 @@ public class MyProcessBar extends JDialog {
 		// TODO Auto-generated catch block
 		e2.printStackTrace();
 	}
+		try {
+			Process process = Runtime.getRuntime().exec("python BP.py");
+		    try {
+				process.waitFor();
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		} catch (Exception e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		progressBar.setString("finished ,wait ...");
 		jPanel.revalidate();
 		this.dispose();
