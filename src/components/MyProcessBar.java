@@ -15,9 +15,10 @@ public class MyProcessBar extends JDialog {
 		jPanel = new JPanel(new BorderLayout());
 		this.setLayout(new BorderLayout());
 		this.add(jPanel);
+		this.setTitle("parsing data");
 		progressBar.setStringPainted(true);
 		progressBar.setFont(new Font("Bitstream Vera Sans", Font.BOLD, 20));
-		progressBar.setString("ready for ...");
+		progressBar.setString("analysing...");
 		add(progressBar);
 		new Thread() {
 			public void run() {

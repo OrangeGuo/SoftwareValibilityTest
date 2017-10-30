@@ -152,7 +152,6 @@ public class MainFrame extends JFrame implements ActionListener,MouseListener{
 		lblNewLabel.setBackground(Color.GRAY);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Bitstream Vera Sans", Font.BOLD, 16));
-		panel_2.add(lblNewLabel, BorderLayout.NORTH);
 		
 		this.loaddata();
 		
@@ -203,6 +202,7 @@ public class MainFrame extends JFrame implements ActionListener,MouseListener{
     	for(int i = 0;fileList!=null&&i<fileList.size();i++)
     		panel_1.remove(fileList.get(i));
     	panel_2.removeAll();
+    	panel_2.add(lblNewLabel, BorderLayout.NORTH);
 		fileList = FileFlow.getDirectory();
 		list = new JList((String [])fileList.toArray(new String[fileList.size()]));
 		list.setBorder(new EmptyBorder(0, 0, 0, 0));
