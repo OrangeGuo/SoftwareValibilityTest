@@ -17,7 +17,6 @@ public class Test extends JFrame{
 	     this.setTitle("进度条的使用");  
 	     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
 	     this.setBounds(100, 100, 400, 400); 
-	     this.add(new MyProcessBar());
 	     this.setVisible(true);
 	}
 

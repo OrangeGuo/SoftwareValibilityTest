@@ -114,8 +114,8 @@ public class MainFrame extends JFrame implements ActionListener,MouseListener{
 		network = new ArrayList<String>();
 		network.add("BPnetwork");
 		network.add("ELM");
-		network.add("RNN");
-		network.add("Fail");
+//		network.add("RNN");
+//		network.add("Fail");
 		
 		jButtons = new ArrayList<JButton>();
 		
@@ -225,7 +225,7 @@ public class MainFrame extends JFrame implements ActionListener,MouseListener{
 			this.loaddata();
 		}
 		else if(e.getActionCommand().equals("analyse")){
-			MyProcessBar myProcessBar = new MyProcessBar();
+			MyProcessBar myProcessBar = new MyProcessBar(network);
 		}
 		else{
 
