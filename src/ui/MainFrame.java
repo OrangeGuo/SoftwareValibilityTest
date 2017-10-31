@@ -124,6 +124,7 @@ public class MainFrame extends JFrame implements ActionListener,MouseListener{
 			jButton.setBackground(new Color(0, 255, 255));
 			jButton.setFont(new Font("Bitstream Vera Sans", Font.PLAIN, 14));
 			jButton.addActionListener(this);
+			jButton.setEnabled(false);
 			jButtons.add(jButton);
 		}
 		
@@ -153,7 +154,7 @@ public class MainFrame extends JFrame implements ActionListener,MouseListener{
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Bitstream Vera Sans", Font.BOLD, 16));
 		
-		this.loaddata();
+//		this.loaddata();
 		
 		panel_3 = new JPanel();
 		splitPane_1.setRightComponent(panel_3);
@@ -191,6 +192,7 @@ public class MainFrame extends JFrame implements ActionListener,MouseListener{
 	    loaddata.setActionCommand("load");
 	    analyse.addActionListener(this);
 	    analyse.setActionCommand("analyse");
+	    analyse.setEnabled(false);
 	    exit.addActionListener(this);
 	    exit.setActionCommand("exit");
 	    
@@ -213,6 +215,8 @@ public class MainFrame extends JFrame implements ActionListener,MouseListener{
 		list.addMouseListener(this);
 		panel_2.add(list, BorderLayout.CENTER);
 		panel_2.revalidate();
+		splitPane_1.setResizeWeight(0.5);
+		splitPane_1.revalidate();
     }
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -223,9 +227,12 @@ public class MainFrame extends JFrame implements ActionListener,MouseListener{
 		
 		else if(e.getActionCommand().equals("load")){
 			this.loaddata();
+			this.analyse.setEnabled(true);
 		}
 		else if(e.getActionCommand().equals("analyse")){
 			MyProcessBar myProcessBar = new MyProcessBar(network);
+			for(int i = 0;i<jButtons.size();i++)
+				jButtons.get(i).setEnabled(true);
 		}
 		else{
 
@@ -235,8 +242,7 @@ public class MainFrame extends JFrame implements ActionListener,MouseListener{
 				if(e.getSource().equals(jButton)&&!panel_1.isHave(network.get(i))){
 					jButton.setEnabled(false);
 					panel_1.addChart(ChartPanelFacotry.getChartPanel(network.get(i)), network.get(i));
-					jButton.setEnabled(true);
-					
+					jButton.setEnabled(true);			
 				}
 			}
 

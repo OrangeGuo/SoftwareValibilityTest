@@ -30,16 +30,17 @@ X_max = X[loop-1][0]
 X_min = X[0][0]
 y_max = y[loop-1]
 y_min = y[0]
-X = (X-X_min)/(X_max-X_min)
-y = (y-y_min)/(y_max-y_min)
+
 # y =np.array([y]).T
 def net_init():
     # sample, result = sklearn.datasets.make_moons(sample_num, noise=0.20)
+    sample = (X-X_min)/(X_max-X_min)
+    result = (y-y_min)/(y_max-y_min)
     W1 = 2 * np.random.random(( hidden_layers,input_layers)) - 1
     W2 = 2 * np.random.random((output_layers,hidden_layers)) - 1
     b1 = np.zeros((hidden_layers,1))
     b2 = np.zeros((output_layers,1))
-    net = {'sample':X,'result':y,'W1':W1,'W2':W2,'b1':b1,'b2':b2}
+    net = {'sample':sample,'result':result,'W1':W1,'W2':W2,'b1':b1,'b2':b2}
     return net
 
 def train(net,loops=20000):
@@ -51,7 +52,7 @@ def train(net,loops=20000):
         z3  = W2.dot(a2)+b2
         exp_scores = np.exp(z3)
 
-        delta3 = exp_scores - y
+        delta3 = exp_scores - result
         # delta3[result,range(sample_num)]-=1
         # print delta3[result,range(sample_num)]-2
         dW2 = delta3.dot(a2.T)
@@ -76,13 +77,15 @@ def predict(net):
     a2 = np.tanh(z2)
     z3 = W2.dot(a2)+b2
     exp_scores = np.exp(z3)
-    X=X*(X_max-X_min)+X_min
     exp_scores = exp_scores*(y_max-y_min)+y_min
-    with open('Data/BPnetwork.txt', 'w') as file:
-        s = '\t\r'.join(str(i[0]) for i in (np.array(X)))
+    print exp_scores
+
+    # print exp_scores
+    with open('data/BPnetwork.txt', 'w') as file:
+        s = '\t\r'.join(str(i) for i in (y))
         file.write(s)
         file.write('\r')
-        s = '\t\r'.join(str(i[0]) for i in (np.array(exp_scores)))
+        s = '\t\r'.join(str(i) for i in (np.array(exp_scores[0])))
         file.write(s)
         file.close()
     # print exp_scores
