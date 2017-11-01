@@ -1,5 +1,6 @@
 #coding:utf-8
 import  string
+import sys
 import numpy as np
 import sklearn.datasets
 import math
@@ -15,7 +16,8 @@ y = []
 loop = 0
 temp = 0.0
 index = 0.0
-for line in open('data/CSR3.DAT'):
+path = 'data/'+str(sys.argv[1])
+for line in open(path):
     s = line.strip().split()
     if s :
         loop+=1
@@ -78,13 +80,13 @@ def predict(net):
     z3 = W2.dot(a2)+b2
     exp_scores = np.exp(z3)
     exp_scores = exp_scores*(y_max-y_min)+y_min
-    print exp_scores
+    # print exp_scores
 
     # print exp_scores
     with open('data/BPnetwork.txt', 'w') as file:
-        s = '\t\r'.join(str(i) for i in (y))
-        file.write(s)
-        file.write('\r')
+        # s = '\t\r'.join(str(i) for i in (y))
+        # file.write(s)
+        # file.write('\r')
         s = '\t\r'.join(str(i) for i in (np.array(exp_scores[0])))
         file.write(s)
         file.close()

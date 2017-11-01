@@ -26,8 +26,8 @@ public class ChartPanelFacotry {
 	    CategoryDataset mDataset = GetDataset(net);
 	    JFreeChart mChart = ChartFactory.createLineChart(
 	        "折线图",//图名字
-	        "迭代次数",//横坐标
-	        "误差",//纵坐标
+	        "时间",//横坐标
+	        "失效次数",//纵坐标
 	        mDataset,//数据集
 	        PlotOrientation.VERTICAL,
 	        true, // 显示图例
@@ -47,12 +47,11 @@ public class ChartPanelFacotry {
 	  {
 	    DefaultCategoryDataset mDataset = new DefaultCategoryDataset();
 	    ArrayList<Float> arrayList = FileFlow.loadFile("data/"+net+".txt");
-	    int index=0;
-	    float temp =0;
+	    ArrayList<Float> failArrayList = FileFlow.loadFile("data/fail.txt");
 	    for(int i =0;i<arrayList.size();i++){
-	    	    temp = arrayList.get(i);
-	    	    index =index+i+1;
-	    		mDataset.addValue(temp,net,  String.valueOf(i+1));
+	    		mDataset.addValue(arrayList.get(i),net,  String.valueOf(i+1));
+	    		if(i<failArrayList.size())
+	    			mDataset.addValue(failArrayList.get(i), "sample", String.valueOf(i+1));;
 	    }
 	    return mDataset;
 	  }

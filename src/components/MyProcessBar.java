@@ -12,7 +12,7 @@ import javax.swing.JProgressBar;
 public class MyProcessBar extends JDialog {
 	final JProgressBar progressBar = new JProgressBar();;
     JPanel jPanel;
-	public MyProcessBar(final ArrayList<String> algriothm) {
+	public MyProcessBar(final ArrayList<String> algriothm,final String filename) {
 		jPanel = new JPanel(new BorderLayout());
 		this.setLayout(new BorderLayout());
 		this.add(jPanel);
@@ -31,10 +31,11 @@ public class MyProcessBar extends JDialog {
 					}
 					progressBar.setValue((i+1)*100/(algriothm.size()+1));
 					if(i<algriothm.size()){
-						process(algriothm.get(i));
+						process(algriothm.get(i),filename);
 					}
 					else {
 						progressBar.setString("finished...");
+						process("fail",filename);
 					}
 				}
 			dispose();
@@ -48,10 +49,11 @@ public class MyProcessBar extends JDialog {
 
 	}
 
-	public void process(String codefile) {
+	public void process(String codefile,String filename) {
 		progressBar.setString(codefile + "is running..");
+//		System.out.println("python "+codefile+".py data/"+filename);
 		try {
-		Process process = Runtime.getRuntime().exec("python "+codefile+".py");
+		Process process = Runtime.getRuntime().exec("python "+codefile+".py "+filename);
 	    try {
 			process.waitFor();
 		} catch (InterruptedException e1) {

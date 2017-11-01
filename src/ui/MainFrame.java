@@ -213,6 +213,7 @@ public class MainFrame extends JFrame implements ActionListener,MouseListener{
 		list.setVisibleRowCount(5);
 		list.setFont(new Font("Bitstream Vera Sans", Font.PLAIN, 12));
 		list.addMouseListener(this);
+		list.setSelectedIndex(0);
 		panel_2.add(list, BorderLayout.CENTER);
 		panel_2.revalidate();
 		splitPane_1.setResizeWeight(0.5);
@@ -230,13 +231,11 @@ public class MainFrame extends JFrame implements ActionListener,MouseListener{
 			this.analyse.setEnabled(true);
 		}
 		else if(e.getActionCommand().equals("analyse")){
-			MyProcessBar myProcessBar = new MyProcessBar(network);
+			MyProcessBar myProcessBar = new MyProcessBar(network,fileList.get(list.getSelectedIndex()));
 			for(int i = 0;i<jButtons.size();i++)
 				jButtons.get(i).setEnabled(true);
 		}
 		else{
-
-
 			for(int i = 0;i<jButtons.size();i++){
 				JButton jButton=jButtons.get(i);
 				if(e.getSource().equals(jButton)&&!panel_1.isHave(network.get(i))){
