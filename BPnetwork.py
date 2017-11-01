@@ -91,6 +91,7 @@ def predict(net):
         file.write(s)
         file.close()
     # print exp_scores
+
 net = net_init()
 output = train(net)
 predict(output)
