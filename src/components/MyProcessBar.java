@@ -50,7 +50,7 @@ public class MyProcessBar extends JDialog {
 	}
 
 	public void process(String codefile,String filename) {
-		progressBar.setString(codefile + "is running..");
+		progressBar.setString(codefile + " is running..");
 //		System.out.println("python "+codefile+".py data/"+filename);
 		try {
 		Process process = Runtime.getRuntime().exec("python "+codefile+".py "+filename);

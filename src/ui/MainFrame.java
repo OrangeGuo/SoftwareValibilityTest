@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
@@ -231,9 +232,15 @@ public class MainFrame extends JFrame implements ActionListener,MouseListener{
 			this.analyse.setEnabled(true);
 		}
 		else if(e.getActionCommand().equals("analyse")){
-			MyProcessBar myProcessBar = new MyProcessBar(network,fileList.get(list.getSelectedIndex()));
-			for(int i = 0;i<jButtons.size();i++)
-				jButtons.get(i).setEnabled(true);
+			String data = fileList.get(list.getSelectedIndex());
+			if(data.endsWith(".DAT")){
+				MyProcessBar myProcessBar = new MyProcessBar(network,data);
+				for(int i = 0;i<jButtons.size();i++)
+					jButtons.get(i).setEnabled(true);
+			}
+			else{
+				JOptionPane.showMessageDialog(null, "file must end with DAT!","Warnning",JOptionPane.WARNING_MESSAGE);
+			}
 		}
 		else{
 			for(int i = 0;i<jButtons.size();i++){
