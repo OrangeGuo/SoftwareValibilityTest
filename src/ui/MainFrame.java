@@ -229,7 +229,11 @@ public class MainFrame extends JFrame implements ActionListener,MouseListener{
 		
 		else if(e.getActionCommand().equals("load")){
 			this.loaddata();
-			this.analyse.setEnabled(true);
+			if(fileList.size()!=0)
+				this.analyse.setEnabled(true);
+			else {
+				JOptionPane.showMessageDialog(null, "No files founde,please reload!","Warnning",JOptionPane.WARNING_MESSAGE);
+			}
 		}
 		else if(e.getActionCommand().equals("analyse")){
 			String data = fileList.get(list.getSelectedIndex());
@@ -237,6 +241,7 @@ public class MainFrame extends JFrame implements ActionListener,MouseListener{
 				MyProcessBar myProcessBar = new MyProcessBar(network,data);
 				for(int i = 0;i<jButtons.size();i++)
 					jButtons.get(i).setEnabled(true);
+				this.loaddata();
 			}
 			else{
 				JOptionPane.showMessageDialog(null, "file must end with DAT!","Warnning",JOptionPane.WARNING_MESSAGE);
