@@ -7,6 +7,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 public class FileFlow {
 	public static ArrayList<Float> loadFile(String filename){
 		FileReader filereader=null;
@@ -39,7 +41,7 @@ public class FileFlow {
 		ArrayList<String> directory  = new ArrayList<String>();
 		File file = new File("data");
 		if(!file.exists()||!file.isDirectory())
-			System.out.println("Error:data not found!");
+			JOptionPane.showMessageDialog(null, "no data found in "+System.getProperty("user.dir"),"Warnning",JOptionPane.WARNING_MESSAGE);
 		else {
 			File files[] = file.listFiles();
 			for(int i = 0;i < files.length; i++)
