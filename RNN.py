@@ -4,7 +4,6 @@ import sys
 import numpy as np
 import sklearn.datasets
 import math
-import os
 
 epsilion = 0.03
 reg_lambda = 0.02
@@ -101,7 +100,6 @@ def predict(net):
         exp_scores = exp_scores * (y_max - y_min) + y_min
         predicts.append(exp_scores.reshape(1))
     predicts = np.array(predicts).reshape(time_predict)
-    os.mknod('data/RNN.txt')
     with open('data/RNN.txt', 'w') as file:
         s = '\t\r'.join(str(i) for i in (y))
         file.write(s)

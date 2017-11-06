@@ -3,7 +3,6 @@ import  string
 import numpy as np
 import math
 import sys
-import os
 X = []
 y = []
 loop = 0
@@ -20,7 +19,6 @@ for line in open(path):
         y.append(index)
 X = np.array(X)
 y = np.array(y)
-os.mknod('data/fail.txt')
 with open('data/fail.txt', 'w') as file:
     s = '\t\r'.join(str(i) for i in (y))
     file.write(s)

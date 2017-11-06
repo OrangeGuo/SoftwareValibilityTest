@@ -4,7 +4,6 @@ import sys
 import numpy as np
 import sklearn.datasets
 import math
-import os
 
 epsilion = 0.01
 reg_lambda = 0.01
@@ -85,7 +84,6 @@ def predict(net):
     # print exp_scores
 
     # print exp_scores
-    os.mknod('data/BPnetwork.txt')
     with open('data/BPnetwork.txt', 'w') as file:
         # s = '\t\r'.join(str(i) for i in (y))
         # file.write(s)
