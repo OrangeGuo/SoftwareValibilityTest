@@ -238,10 +238,9 @@ public class MainFrame extends JFrame implements ActionListener,MouseListener{
 		else if(e.getActionCommand().equals("analyse")){
 			String data = fileList.get(list.getSelectedIndex());
 			if(data.endsWith(".DAT")){
-				cleanTxt();
-//				MyProcessBar myProcessBar = new MyProcessBar(network,data);
-//				for(int i = 0;i<jButtons.size();i++)
-//					jButtons.get(i).setEnabled(true);
+				MyProcessBar myProcessBar = new MyProcessBar(network,data);
+				for(int i = 0;i<jButtons.size();i++)
+					jButtons.get(i).setEnabled(true);
 				this.loaddata();
 			}
 			else{
@@ -260,20 +259,6 @@ public class MainFrame extends JFrame implements ActionListener,MouseListener{
 
 		}
 	}
-    public void cleanTxt(){
-		try {
-		Process process = Runtime.getRuntime().exec("rm -rf data/*.txt");
-	    try {
-			process.waitFor();
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-	} catch (Exception e2) {
-		// TODO Auto-generated catch block
-		e2.printStackTrace();
-	}
-    }
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
