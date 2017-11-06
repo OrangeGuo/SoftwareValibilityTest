@@ -2,7 +2,7 @@ from numpy import *
 import numpy as np
 import string
 import sys
-
+import os
 #set basic params
 input_layers_num = 1
 hidden_layers_num = 5
@@ -42,6 +42,7 @@ output_weights = (mat(hidden)).I.dot(y)
 #     loop +=1
 
 result = X.dot(input_weights).dot(output_weights)
+os.mknod('data/ELM.txt')
 with open('data/ELM.txt', 'w') as file:
     s = '\t\r'.join(str(i[0]) for i in (np.array(result)))
     file.write(s)

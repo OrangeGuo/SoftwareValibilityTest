@@ -40,8 +40,9 @@ public class FileFlow {
 	public static ArrayList<String> getDirectory(){
 		ArrayList<String> directory  = new ArrayList<String>();
 		File file = new File("data");
-		if(!file.exists()||!file.isDirectory())
+		if(!file.exists()||!file.isDirectory()){
 			JOptionPane.showMessageDialog(null, "no data found in "+System.getProperty("user.dir"),"Warnning",JOptionPane.WARNING_MESSAGE);
+		}
 		else {
 			File files[] = file.listFiles();
 			for(int i = 0;i < files.length; i++)
