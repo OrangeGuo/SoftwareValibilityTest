@@ -8,6 +8,7 @@ import math
 epsilion = 0.01
 reg_lambda = 0.01
 np.random.seed(0)
+time_predict = 20
 
 input_layers = 1
 hidden_layers = 5
@@ -76,14 +77,19 @@ def train(net,loops=20000):
     return net
 def predict(net):
     sample,result,W1,W2,b1,b2 =net['sample'],net['result'],net['W1'],net['W2'],net['b1'],net['b2']
-    z2 = W1.dot(sample.T)+b1
+    temp = np.random.random((loop+time_predict,1))
+    for i in range(loop):
+        temp[i][0] = X_max[i][0]
+    for i in range(time_predict):
+        temp[loop+i][0] =temp[loop-1+i] + loop + i + 1
+    for i in range(loop+time_predict):
+    z2 = W1.dot(temp.T)+b1
     a2 = np.tanh(z2)
     z3 = W2.dot(a2)+b2
     exp_scores = np.exp(z3)
+    print exp_scores
     exp_scores = exp_scores*(y_max-y_min)+y_min
-    # print exp_scores
-
-    # print exp_scores
+    print exp_scores
     with open('data/BPnetwork.txt', 'w') as file:
         # s = '\t\r'.join(str(i) for i in (y))
         # file.write(s)
@@ -91,7 +97,6 @@ def predict(net):
         s = '\t\r'.join(str(i) for i in (np.array(exp_scores[0])))
         file.write(s)
         file.close()
-    # print exp_scores
 
 net = net_init()
 output = train(net)

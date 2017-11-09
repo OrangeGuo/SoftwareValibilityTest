@@ -116,8 +116,8 @@ public class MainFrame extends JFrame implements ActionListener,MouseListener{
 		network.add("BPnetwork");
 		network.add("ELM");
 		network.add("RNN");
-		network.add("MELM");
-		network.add("LS");
+//		network.add("MELM");
+//		network.add("LS");
 //		network.add("Fail");
 		
 		jButtons = new ArrayList<JButton>();

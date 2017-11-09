@@ -3,6 +3,7 @@ import numpy as np
 import string
 import sys
 #set basic params
+time_predict = 20
 input_layers_num = 1
 hidden_layers_num = 5
 output_layers_num = 1
@@ -39,12 +40,16 @@ output_weights = (mat(hidden)).I.dot(y)
 #     else:
 #         sample[i][0] = sample[i-1][0]+loop
 #     loop +=1
-
-result = X.dot(input_weights).dot(output_weights)
+predicts = []
+temp = np.random.random((loop+time_predict,1))
+for i in range(loop):
+    temp[i][0] = X[i][0]
+for i in range(time_predict):
+    temp[loop+i][0] = temp[loop-1+i] + loop + i + 1
+result = temp.dot(input_weights).dot(output_weights)
 with open('data/ELM.txt', 'w') as file:
     s = '\t\r'.join(str(i[0]) for i in (np.array(result)))
     file.write(s)
     file.close()
 
-init()
 
