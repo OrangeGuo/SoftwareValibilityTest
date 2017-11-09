@@ -14,6 +14,9 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 
+import wuyiyang.Leastsquares;
+import wuyiyang.Melm;
+
 public class ChartPanelFacotry {
 
 	public static ChartPanel  getChartPanel(String net) {
@@ -46,13 +49,27 @@ public class ChartPanelFacotry {
 	  public static CategoryDataset GetDataset(String net)
 	  {
 	    DefaultCategoryDataset mDataset = new DefaultCategoryDataset();
-	    ArrayList<Float> arrayList = FileFlow.loadFile("data/"+net+".txt");
-	    ArrayList<Float> failArrayList = FileFlow.loadFile("data/fail.txt");
-	    for(int i =0;i<arrayList.size();i++){
+        if(net.equals("MELM")){
+             ArrayList<Float> arrayList = new Melm().tranmatrix();
+     	    for(int i =0;i<arrayList.size();i++){
 	    		mDataset.addValue(arrayList.get(i),net,  String.valueOf(i+1));
-	    		if(i<failArrayList.size())
-	    			mDataset.addValue(failArrayList.get(i), "sample", String.valueOf(i+1));;
 	    }
+        }
+        else if(net.equals("LS")){
+            ArrayList<Float> arrayList = new Leastsquares().getArrayList();
+    	    for(int i =0;i<arrayList.size();i++){
+	    		mDataset.addValue(arrayList.get(i),net,  String.valueOf(i+1));
+	    }
+		}
+        else {
+    	    ArrayList<Float> arrayList = FileFlow.loadFile("data/"+net+".txt");
+    	    ArrayList<Float> failArrayList = FileFlow.loadFile("data/fail.txt");
+    	    for(int i =0;i<arrayList.size();i++){
+    	    		mDataset.addValue(arrayList.get(i),net,  String.valueOf(i+1));
+    	    		if(i<failArrayList.size())
+    	    			mDataset.addValue(failArrayList.get(i), "sample", String.valueOf(i+1));;
+    	    }
+		}
 	    return mDataset;
 	  }
 }
