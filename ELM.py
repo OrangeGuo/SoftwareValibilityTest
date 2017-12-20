@@ -46,5 +46,4 @@ with open('data/ELM.txt', 'w') as file:
     file.write(s)
     file.close()
 
-init()
 
