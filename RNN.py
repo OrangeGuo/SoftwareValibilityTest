@@ -92,8 +92,8 @@ def predict(net):
     predicts = []
     temp = X[loop-1][0]
     for i in range(time_predict):
-	temp = temp + loop + i + 1
-        z2 = W1.dot((temp-X_min)/(X_max-X_min)) + H.dot(S)+ b1,
+     	temp = temp + loop + i + 1
+        z2 = W1.dot((temp-X_min)/(X_max-X_min)) + H.dot(S)+ b1
         a2 = np.tanh(z2)
         z3 = W2.dot(a2) + b2
         exp_scores = np.exp(z3)
