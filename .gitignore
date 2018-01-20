@@ -1,1 +1,4 @@
 *.txt
+/out/production/SoftwareValibilityTest/components/Test.class
+/bin
+bin

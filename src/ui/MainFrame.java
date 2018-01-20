@@ -1,8 +1,6 @@
 package ui;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -11,7 +9,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 
@@ -19,14 +16,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JSplitPane;
-
-import org.jfree.chart.ChartFrame;
-import org.jfree.chart.ChartPanel;
 
 import components.ChartPanelFacotry;
 import components.FileFlow;
@@ -41,18 +34,11 @@ import java.awt.Toolkit;
 import javax.swing.UIManager;
 
 import java.awt.Font;
-import java.io.IOException;
-import java.nio.channels.NetworkChannel;
 import java.util.ArrayList;
-import java.awt.CardLayout;
-
-import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JList;
 import javax.swing.ListSelectionModel;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.LineBorder;
 
 public class MainFrame extends JFrame implements ActionListener,MouseListener{
 

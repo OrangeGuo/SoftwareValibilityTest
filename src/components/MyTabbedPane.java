@@ -11,7 +11,6 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 import org.jfree.chart.ChartPanel;
-import org.omg.CosNaming.NamingContextExtPackage.AddressHelper;
 
 public class MyTabbedPane extends JTabbedPane implements ActionListener{
 //	private JTabbedPane jTabbedPane;

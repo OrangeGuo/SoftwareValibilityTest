@@ -1,10 +1,7 @@
 package components;
 
-import java.awt.BorderLayout;
 import java.awt.Font;
 
-import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
